@@ -6,15 +6,19 @@ using UnityEngine.UI;
 
 public class Drive : MonoBehaviour
 {
-   
+
+    Vector2 dir;
 
     void Update()
     {
-        Vector3 position = this.transform.position;
-        position.x += 0.1f;
-        position.y += 0.1f;
+        float horizental = Input.GetAxis("Horizontal");
+        float vertical = Input.GetAxis("Vertical");
 
-        this.transform.position = position;
+        dir = new Vector2(horizental, vertical);
+        Vector3 position = this.transform.position;
+        
+
+        this.transform.Translate(dir*Time.deltaTime);
     }
 
 }
