@@ -48,11 +48,24 @@ public class HolisticMath
         return radian * 180 / Mathf.PI;
     }
 
-    static public Coords Rotate(Coords vector, float angle)// in radians
+    static public Coords Rotate(Coords vector, float angle, bool clockwise)// in radians
     {
+        if (clockwise)
+        {
+            angle = 2 * Mathf.PI - angle;
+        }
         float xValue = vector.x * Mathf.Cos(angle) - vector.y * Mathf.Sin(angle);
         float yValue = vector.x * Mathf.Sin(angle) - vector.y * Mathf.Cos(angle);
 
-        return new Coords(yValue, yValue, 0);
+        return new Coords(yValue, yValue, 0);                                                                                                                                                                                                                                                              
+    }
+
+    static public Coords CrossProduct(Coords vector1, Coords vector2)
+    {
+        float x = (vector1.y * vector2.z) - (vector2.y * vector1.z);
+        float y = (vector1.x * vector2.z) - (vector2.x * vector1.z);
+        float z = (vector1.x * vector2.y) - (vector1.y * vector2.x);
+        Coords cross = new Coords(x,y,z);
+        return cross;
     }
 }
